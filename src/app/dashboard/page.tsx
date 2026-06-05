@@ -1,7 +1,6 @@
 "use client";
 
 import DashboardLayout from "@/components/layout/dashboard-layout";
-
 import StatsCard from "@/components/cards/stats-card";
 
 import {
@@ -29,7 +28,6 @@ export default function DashboardPage() {
 
         {/* STATS */}
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-
           <StatsCard
             title="Total Projects"
             value="24"
@@ -64,7 +62,6 @@ export default function DashboardPage() {
 
           {/* ANALYTICS */}
           <div className="rounded-3xl border border-slate-200 bg-[var(--card)] p-6 dark:border-white/10 xl:col-span-2">
-
             <h2 className="text-xl font-semibold text-[var(--foreground)]">
               Analytics
             </h2>
@@ -76,17 +73,15 @@ export default function DashboardPage() {
 
           {/* RECENT ACTIVITY */}
           <div className="rounded-3xl border border-slate-200 bg-[var(--card)] p-6 dark:border-white/10">
-
             <h2 className="text-xl font-semibold text-[var(--foreground)]">
               Recent Activity
             </h2>
 
             <div className="mt-6 space-y-4">
 
-              {/* ITEM */}
-              <div className="rounded-2xl bg-slate-100 p-4 dark:bg-[#0F172A]">
-
-                <p className="xt-sm font-medium text-[#0F172A] dark:text-white">
+              {/* ITEM 1 */}
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-white/10 dark:bg-[#0F172A]">
+                <p className="text-sm font-medium text-[#0F172A] dark:text-white">
                   New sprint created
                 </p>
 
@@ -95,10 +90,9 @@ export default function DashboardPage() {
                 </p>
               </div>
 
-              {/* ITEM */}
-              <div className="rounded-2xl bg-slate-100 p-4 dark:bg-[#0F172A]">
-
-                <p className="xt-sm font-medium text-[#0F172A] dark:text-white">
+              {/* ITEM 2 */}
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-white/10 dark:bg-[#0F172A]">
+                <p className="text-sm font-medium text-[#0F172A] dark:text-white">
                   Risk detected
                 </p>
 

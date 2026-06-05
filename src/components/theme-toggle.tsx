@@ -1,14 +1,12 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-
 import { useTheme } from "next-themes";
-
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-
+  // 1. Pull in resolvedTheme
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -17,13 +15,12 @@ export default function ThemeToggle() {
 
   if (!mounted) return null;
 
-  const isDark = theme === "dark";
+  // 2. Check resolvedTheme instead of theme
+  const isDark = resolvedTheme === "dark";
 
   return (
     <button
-      onClick={() =>
-        setTheme(isDark ? "light" : "dark")
-      }
+      onClick={() => setTheme(isDark ? "light" : "dark")}
       className={`rounded-2xl p-3 transition ${
         isDark
           ? "bg-[#1E293B] text-white"
