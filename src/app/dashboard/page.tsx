@@ -2,6 +2,7 @@
 
 import DashboardLayout from "@/components/layout/dashboard-layout";
 import StatsCard from "@/components/cards/stats-card";
+import ProjectChart from "@/components/charts/project-chart";
 
 import {
   FolderKanban,
@@ -66,8 +67,8 @@ export default function DashboardPage() {
               Analytics
             </h2>
 
-            <div className="mt-6 flex h-80 items-center justify-center rounded-2xl border border-dashed border-slate-300 text-slate-500 dark:border-slate-700 dark:text-slate-400">
-              Charts Coming Soon
+            <div className="mt-6 h-80">
+              <ProjectChart />
             </div>
           </div>
 
@@ -105,6 +106,7 @@ export default function DashboardPage() {
           </div>
 
         </div>
+
       </div>
     </DashboardLayout>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 
+
 import {
   LayoutDashboard,
   FolderKanban,
@@ -27,17 +28,22 @@ const menuItems = [
   {
     title: "Estimations",
     icon: BarChart3,
-    href: "/estimations",
+    href: "/estimation",
   },
   {
     title: "Risks",
     icon: ShieldAlert,
-    href: "/risks",
+    href: "/risk",
   },
   {
     title: "Team",
     icon: Users,
     href: "/team",
+  },
+  {
+    title: "Analytics",
+    icon: Users,
+    href: "/analytics",
   },
   {
     title: "Settings",
@@ -131,9 +137,9 @@ export default function Sidebar() {
             Predict delays and risks using AI analytics.
           </p>
 
-          <button className="mt-4 rounded-xl bg-white/20 px-4 py-2 transition hover:bg-white/30">
+          <Link href="/ai" className="mt-4 rounded-xl bg-white/20 px-4 py-2 transition hover:bg-white/30">
             Explore
-          </button>
+          </Link>
         </div>
       </div>
     </aside>
