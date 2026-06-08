@@ -1,6 +1,7 @@
 "use client";
 
-import { Bell, Menu, Search } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Bell, Menu, Search, Settings, LogOut } from "lucide-react";
 
 import {
   Sheet,
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/sheet";
 
 import { useTheme } from "next-themes";
+import { signOut } from "next-auth/react";
 
 import Sidebar from "../sidebar/sidebar";
 import ThemeToggle from "../theme-toggle";
@@ -20,6 +22,38 @@ export default function Navbar() {
   const { theme } = useTheme();
 
   const isDark = theme === "dark";
+
+  const [open, setOpen] = useState(false);
+
+  const dropdownRef =
+    useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(
+      event: MouseEvent
+    ) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(
+          event.target as Node
+        )
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+    };
+  }, []);
 
   return (
     <header
@@ -31,7 +65,6 @@ export default function Navbar() {
     >
       {/* LEFT */}
       <div className="flex items-center gap-4">
-        {/* MOBILE MENU */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
@@ -98,36 +131,85 @@ export default function Navbar() {
           <Bell size={20} />
         </button>
 
+        {/* PROFILE DROPDOWN */}
         <div
-          className={`flex items-center gap-3 rounded-2xl px-3 py-2 ${
-            isDark
-              ? "bg-[#1E293B]"
-              : "bg-white"
-          }`}
+          className="relative"
+          ref={dropdownRef}
         >
-          <div className="h-10 w-10 rounded-full bg-blue-500" />
+          <button
+            onClick={() =>
+              setOpen(!open)
+            }
+            className={`flex items-center gap-3 rounded-2xl px-3 py-2 transition ${
+              isDark
+                ? "bg-[#1E293B]"
+                : "bg-white"
+            }`}
+          >
+            <div className="h-10 w-10 rounded-full bg-blue-500" />
 
-          <div className="hidden sm:block">
-            <p
-              className={`text-sm font-semibold ${
+            <div className="hidden text-left sm:block">
+              <p
+                className={`text-sm font-semibold ${
+                  isDark
+                    ? "text-white"
+                    : "text-[#0F172A]"
+                }`}
+              >
+                Aryan
+              </p>
+
+              <p
+                className={`text-xs ${
+                  isDark
+                    ? "text-slate-400"
+                    : "text-slate-500"
+                }`}
+              >
+                Project Manager
+              </p>
+            </div>
+          </button>
+
+          {open && (
+            <div
+              className={`absolute right-0 mt-3 w-60 overflow-hidden rounded-2xl border shadow-xl ${
                 isDark
-                  ? "text-white"
-                  : "text-[#0F172A]"
+                  ? "border-white/10 bg-[#1E293B]"
+                  : "border-slate-200 bg-white"
               }`}
             >
-              Aryan
-            </p>
+              <div className="border-b border-slate-200 p-4 dark:border-white/10">
+                <p className="font-semibold">
+                  Aryan
+                </p>
 
-            <p
-              className={`text-xs ${
-                isDark
-                  ? "text-slate-400"
-                  : "text-slate-500"
-              }`}
-            >
-              Project Manager
-            </p>
-          </div>
+                <p className="text-sm text-slate-500">
+                  Project Manager
+                </p>
+              </div>
+
+              <button
+                className="flex w-full items-center gap-3 px-4 py-3 text-left transition hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                <Settings size={18} />
+                Settings
+              </button>
+
+              <button
+                onClick={() =>
+                  signOut({
+                    callbackUrl:
+                      "/login",
+                  })
+                }
+                className="flex w-full items-center gap-3 px-4 py-3 text-left text-red-500 transition hover:bg-red-500/10"
+              >
+                <LogOut size={18} />
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>
