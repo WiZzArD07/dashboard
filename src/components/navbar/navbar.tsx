@@ -1,7 +1,17 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Bell, Menu, Search, Settings, LogOut } from "lucide-react";
+import Link from "next/link";
+import { signOut } from "next-auth/react";
+import {
+  Bell,
+  Menu,
+  Search,
+  Settings,
+  LogOut,
+} from "lucide-react";
+
+import { useTheme } from "next-themes";
 
 import {
   Sheet,
@@ -11,9 +21,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-import { useTheme } from "next-themes";
-import { signOut } from "next-auth/react";
 
 import Sidebar from "../sidebar/sidebar";
 import ThemeToggle from "../theme-toggle";
@@ -65,6 +72,7 @@ export default function Navbar() {
     >
       {/* LEFT */}
       <div className="flex items-center gap-4">
+        {/* MOBILE MENU */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
@@ -121,6 +129,7 @@ export default function Navbar() {
       <div className="flex items-center gap-4">
         <ThemeToggle />
 
+        {/* NOTIFICATION */}
         <button
           className={`rounded-2xl p-3 transition ${
             isDark
@@ -131,7 +140,7 @@ export default function Navbar() {
           <Bell size={20} />
         </button>
 
-        {/* PROFILE DROPDOWN */}
+        {/* PROFILE */}
         <div
           className="relative"
           ref={dropdownRef}
@@ -146,7 +155,9 @@ export default function Navbar() {
                 : "bg-white"
             }`}
           >
-            <div className="h-10 w-10 rounded-full bg-blue-500" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 font-semibold text-white">
+              A
+            </div>
 
             <div className="hidden text-left sm:block">
               <p
@@ -189,12 +200,16 @@ export default function Navbar() {
                 </p>
               </div>
 
-              <button
-                className="flex w-full items-center gap-3 px-4 py-3 text-left transition hover:bg-slate-100 dark:hover:bg-slate-800"
+              <Link
+                href="/settings"
+                onClick={() =>
+                  setOpen(false)
+                }
+                className="flex w-full items-center gap-3 px-4 py-3 transition hover:bg-slate-100 dark:hover:bg-slate-800"
               >
                 <Settings size={18} />
                 Settings
-              </button>
+              </Link>
 
               <button
                 onClick={() =>
