@@ -4,6 +4,8 @@ SprintX is a modern AI-powered Software Project Management Dashboard designed to
 
 Built with modern full-stack technologies, SprintX combines project tracking, team management, executive reporting, and AI-driven insights to improve project visibility and decision-making.
 
+Live link : https://sprintx-dun.vercel.app/login
+
 ---
 
 # 🌟 Vision
