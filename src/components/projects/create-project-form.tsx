@@ -25,9 +25,6 @@ export default function CreateProjectForm() {
             name,
             description,
             budget: Number(budget),
-
-            ownerId:
-              "cmq1jtjrv0000javc74uyr4gq",
           }),
         }
       );
