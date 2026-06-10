@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
@@ -29,6 +30,8 @@ export default function Navbar() {
   const { theme } = useTheme();
 
   const isDark = theme === "dark";
+
+  const { data: session } = useSession();
 
   const [open, setOpen] = useState(false);
 
@@ -156,7 +159,7 @@ export default function Navbar() {
             }`}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 font-semibold text-white">
-              A
+              {session?.user?.name?.charAt(0).toUpperCase() || "U"}
             </div>
 
             <div className="hidden text-left sm:block">
@@ -167,7 +170,7 @@ export default function Navbar() {
                     : "text-[#0F172A]"
                 }`}
               >
-                Aryan
+                {session?.user?.name || "User"}
               </p>
 
               <p
@@ -177,7 +180,7 @@ export default function Navbar() {
                     : "text-slate-500"
                 }`}
               >
-                Project Manager
+                {session?.user?.role || "Member"}
               </p>
             </div>
           </button>
@@ -192,11 +195,11 @@ export default function Navbar() {
             >
               <div className="border-b border-slate-200 p-4 dark:border-white/10">
                 <p className="font-semibold">
-                  Aryan
+                  {session?.user?.name}
                 </p>
 
                 <p className="text-sm text-slate-500">
-                  Project Manager
+                  {session?.user?.email}
                 </p>
               </div>
 
