@@ -77,6 +77,7 @@ export default function LoginPage() {
 
         <form
           onSubmit={handleSubmit}
+          autoComplete="off"
           className="space-y-4"
         >
 
@@ -87,6 +88,8 @@ export default function LoginPage() {
 
             <input
               type="email"
+              name="email"
+              autoComplete="off"
               placeholder="Enter your email"
               value={email}
               onChange={(e) =>
@@ -106,6 +109,8 @@ export default function LoginPage() {
 
             <input
               type="password"
+              name="password"
+              autoComplete="new-password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) =>
